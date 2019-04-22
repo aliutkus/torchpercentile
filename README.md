@@ -30,11 +30,11 @@ a Pytorch tensor with the same shape as `input` except the first dimension, whos
 
 ## Installation
 
-Go in the `install` subfolder and type `python setup.py install`
+Type `pip install .`
 
 ## Usage
 
-Try out `python test.py`
+Try out `python test.py` in the `examples` folder.
 ```
 calling percentile on a tensor of dimension [10000    10    50]
 numpy: 154.368ms,
