@@ -22,10 +22,11 @@ class Percentile(torch.autograd.Function):
         """
         input_shape = input.shape
         if not isinstance(percentiles, torch.Tensor):
-            percentiles = torch.tensor(percentiles).float()
+            percentiles = torch.tensor(percentiles).double()
         percentiles = percentiles.to(input.device)
         input = input.view(input.shape[0], -1)
         in_sorted, in_argsort = torch.sort(input, dim=0)
+        in_sorted = in_sorted.doubel()
         positions = percentiles * (input.shape[0]-1) / 100
         floored = torch.floor(positions)
         ceiled = floored + 1
