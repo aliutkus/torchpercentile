@@ -26,7 +26,7 @@ class Percentile(torch.autograd.Function):
         percentiles = percentiles.to(input.device)
         input = input.view(input.shape[0], -1)
         in_sorted, in_argsort = torch.sort(input, dim=0)
-        in_sorted = in_sorted.doubel()
+        in_sorted = in_sorted.double()
         positions = percentiles * (input.shape[0]-1) / 100
         floored = torch.floor(positions)
         ceiled = floored + 1
