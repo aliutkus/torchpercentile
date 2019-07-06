@@ -20,13 +20,15 @@ class Percentile(torch.autograd.Function):
         """
         Find the percentiles of a tensor along the first dimension.
         """
+        input_dtype=input.dtype
         input_shape = input.shape
+        percentiles = percentiles.double()
         if not isinstance(percentiles, torch.Tensor):
             percentiles = torch.tensor(percentiles).double()
         percentiles = percentiles.to(input.device)
+        input=input.double()
         input = input.view(input.shape[0], -1)
         in_sorted, in_argsort = torch.sort(input, dim=0)
-        in_sorted = in_sorted.double()
         positions = percentiles * (input.shape[0]-1) / 100
         floored = torch.floor(positions)
         ceiled = floored + 1
@@ -37,7 +39,8 @@ class Percentile(torch.autograd.Function):
         d1 = in_sorted[ceiled.long(), :] * weight_ceiled[:, None]
         self.save_for_backward(input_shape, in_argsort, floored.long(),
                                ceiled.long(), weight_floored, weight_ceiled)
-        return (d0+d1).view(-1, *input_shape[1:])
+        result=(d0+d1).view(-1, *input_shape[1:])
+        return result.type(input_dtype)
 
     def backward(self, grad_output):
         """
