@@ -22,8 +22,8 @@ class Percentile(torch.autograd.Function):
         """
         input_shape = input.shape
         if not isinstance(percentiles, torch.Tensor):
-            percentiles = torch.tensor(percentiles).double()
-        percentiles = percentiles.to(input.device)
+            percentiles = torch.tensor(percentiles)
+        percentiles = percentiles.to(input.device).double()
         input = input.view(input.shape[0], -1)
         in_sorted, in_argsort = torch.sort(input, dim=0)
         in_sorted = in_sorted.double()
