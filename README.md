@@ -30,7 +30,7 @@ a Pytorch tensor with the same shape as `input` except the first dimension, whos
 
 ## Installation
 
-Type `pip install .`
+Type `pip install -e .`
 
 ## Usage
 
