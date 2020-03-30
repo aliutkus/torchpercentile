@@ -22,7 +22,8 @@ class Percentile(torch.autograd.Function):
         """
         input_dtype = input.dtype
         input_shape = input.shape
-        percentiles = percentiles.double()
+        if not isinstance(percentiles, torch.Tensor):
+            percentiles = torch.tensor(percentiles, dtype=torch.double)
         if not isinstance(percentiles, torch.Tensor):
             percentiles = torch.tensor(percentiles)
         input = input.double()
