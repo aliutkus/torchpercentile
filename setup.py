@@ -1,4 +1,5 @@
-from setuptools import setup
+from setuptools import setup, find_packages
+from os import path
 
 # trying to import the required torch package
 try:
@@ -27,7 +28,5 @@ setup(
     keywords='percentile',
     install_requires=[
         'torchsearchsorted @ git+https://github.com/aliutkus/torchsearchsorted',
-    ],
+    ])
 
-    author='Antoine Liutkus',
-    author_email='antoine.liutkus@inria.fr')
